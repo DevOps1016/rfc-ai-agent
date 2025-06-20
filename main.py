@@ -405,7 +405,7 @@ Extracted document text:
 def login_ui():
     set_background()
     show_stepper(0)
-    st.markdown("<h1 style='color:#2A60C0'>🔐 RFC Generator & Mermaid AI Uploader</h1>", unsafe_allow_html=True)
+    st.markdown("<h1 style='color:#2A60C0'> RFC AI Agent </h1>", unsafe_allow_html=True)
     with st.form("login_form"):
         aws_access_key = st.text_input("AWS Access Key ID", type="password")
         aws_secret_key = st.text_input("AWS Secret Access Key", type="password")
@@ -441,7 +441,7 @@ def choose_rfc_or_new_ui():
             st.session_state.stage = "file_choice"
             st.rerun()
     with col2:
-        if st.button("👓 Review/Comment on Existing RFC", key="choose_review_rfc", use_container_width=True):
+        if st.button("Review/Comment on Existing RFC", key="choose_review_rfc", use_container_width=True):
             st.session_state.choose_rfc_flow = "existing"
             st.session_state.stage = "manager_comment"
             st.rerun()
@@ -457,7 +457,7 @@ def file_choice_ui():
     st.markdown('<div class="file-choice-div">', unsafe_allow_html=True)
     col_upload, col_s3 = st.columns(2)
     with col_upload:
-        st.subheader("Upload from your computer")
+        st.subheader("Upload from PC")
         uploaded_file = st.file_uploader(
             "Upload a Word, PDF, Markdown, or Text file:",
             type=["docx", "pdf", "md", "txt"],
@@ -703,7 +703,7 @@ def md_review_ui():
     st.markdown("---")
     col1, col2 = st.columns(2)
     with col1:
-        if st.button("Upload Markdown to S3"):
+        if st.button("Upload RFC Markdown Document to S3"):
             upload_bucket = st.session_state.get("bucket") or st.selectbox(
                 "Select S3 bucket to upload .md",
                 list_buckets(st.session_state.s3_client),
@@ -728,7 +728,7 @@ def md_review_ui():
                     st.error(f"Upload failed: {e}")
     with col2:
         st.download_button(
-            label="Download RFC Markdown",
+            label="Download RFC Markdown Document",
             data=st.session_state.md_code_edit,
             file_name=st.session_state.file_name.rsplit(".", 1)[0] + "_RFC.md",
             mime="text/markdown",
