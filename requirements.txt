@@ -1,0 +1,6 @@
+streamlit
+boto3
+python-docx
+PyPDF2
+pillow
+pytesseract
